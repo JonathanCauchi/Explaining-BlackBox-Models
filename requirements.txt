@@ -1,0 +1,10 @@
+numpy
+imblearn
+scikit-learn
+dice-ml
+pandas
+h5py
+jsonschema
+tqdm
+pytest
+tensorflow>=1.13.0-rc1
