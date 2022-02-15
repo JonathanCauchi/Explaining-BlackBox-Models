@@ -1,0 +1,1 @@
+{"score": 0.7776886035313002, "best_model": {"clf__C": 1, "clf__kernel": "rbf"}}
