@@ -1,0 +1,1 @@
+{"score": 0.7, "best_model": {"clf__bootstrap": false, "clf__criterion": "gini", "clf__max_depth": 1, "clf__max_features": "auto", "clf__n_estimators": 270}}
