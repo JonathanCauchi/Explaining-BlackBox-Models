@@ -1,1 +1,1 @@
-{"score": 0.9279999999999999, "best_model": {"clf__C": 1, "clf__gamma": 0.1, "clf__kernel": "rbf"}}
+{"aucroc_score": 0.9279999999999999, "best_model": {"clf__C": 1, "clf__gamma": 0.1, "clf__kernel": "rbf"}}
