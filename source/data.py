@@ -23,9 +23,9 @@ def data_cleaning(df, file):
        if file == 'cervical-cancer':
           df = df.drop(['STDs: Time since first diagnosis', 'STDs: Time since last diagnosis', 'Hinselmann', 'Schiller', 'Citology'],axis=1)
        elif file == 'credit-score':
-  	  df = df.drop(['Unnamed: 0'],axis=1)
+          df = df.drop(['Unnamed: 0'],axis=1)
        elif file == 'adult-income': 
-          continue 
+          pass 
        df = self.fill_na(df,file)
        return df
        
@@ -36,7 +36,7 @@ def fill_na(df, file):
        elif file == 'credit-score':
           df[['Checking account','Saving accounts']] = df[['Checking account','Saving accounts']].fillna('')
        elif file == 'adult-income': 
-          continue
+          pass
        return df
        
 def transform_label(df, name):
@@ -49,29 +49,31 @@ def transform_label(df, name):
           df['income'] = LE.fit_transform(df['income'])
        return df
     
-def balance_dataset(df, name):
-       ros = SMOTE()
-       rus = RandomUnderSampler()
-       if name == 'cervical-cancer':
-          target = df["Biopsy"]
-	   X = df.drop(['Biopsy'],axis=1)
-	   df, target = ros.fit_resample(X, target)
-	   df = pd.concat([df,target],axis=1)
-	   for col in df.columns:
-    	       df[col] = df[col].astype(str).astype(float)	
-    	       	
-       elif name == 'credit-score':
-          target = df["Risk"]
-	   X = df.drop(['Risk'],axis=1)
-	   df, target = rus.fit_resample(X, target)
-	   df = pd.concat([df,target],axis=1)
-	   
-       elif name == 'adult-income': 
-           target = df["income"]
-	   X = df.drop(['income'],axis=1)
-	   df, target = rus.fit_resample(X, target)
-	   df = pd.concat([df,target],axis=1)
-	   
-       return df
 
+def balance_dataset(df,name):
+    
+    ros = SMOTE()
+    rus = RandomUnderSampler()
+    
+    if name == 'cervical-cancer':
+        target = df["Biopsy"]
+        X=df.drop(['Biopsy'],axis=1)
+        df, target = ros.fit_resample(X,target)
+        df = pd.concat([df,target],axis=1)
+        for col in df.columns:
+            df[col] = df[col].astype(str).astype(float)
+            
+    elif name == 'credit-score':
+        target = df["Risk"]
+        X=df.drop(['Risk'],axis=1)
+        df, target = rus.fit_resample(X,target)
+        df = pd.concat([df,target],axis=1)
+        
+    elif name == 'adult-income':
+        target = df["income"]
+        X=df.drop(['income'],axis=1)
+        df, target = rus.fit_resample(X,target)
+        df = pd.concat([df,target],axis=1)
+        
+    return df
 
